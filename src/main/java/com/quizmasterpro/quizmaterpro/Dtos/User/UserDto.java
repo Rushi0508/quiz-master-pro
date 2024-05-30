@@ -1,9 +1,9 @@
-package com.quizmasterpro.quizmasterpro.Dtos.User;
+package com.quizmasterpro.quizmaterpro.Dtos.User;
 
 import java.util.List;
 import java.util.UUID;
 
-import com.quizmasterpro.quizmasterpro.Dtos.Quiz.QuizDto;
+import com.quizmasterpro.quizmaterpro.Dtos.Quiz.QuizDto;
 
 import lombok.Data;
 

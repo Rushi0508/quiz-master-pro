@@ -1,4 +1,4 @@
-package com.quizmasterpro.quizmasterpro.Models;
+package com.quizmasterpro.quizmaterpro.Models;
 
 import java.util.Collection;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -27,7 +28,7 @@ public class User implements UserDetails {
     private String password;
     private String email;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Quiz> quizzes;
 
     @Override

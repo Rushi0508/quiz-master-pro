@@ -1,4 +1,4 @@
-package com.quizmasterpro.quizmasterpro.Models;
+package com.quizmasterpro.quizmaterpro.Models;
 
 import java.util.UUID;
 

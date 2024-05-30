@@ -1,4 +1,4 @@
-package com.quizmasterpro.quizmasterpro.Dtos.Quiz;
+package com.quizmasterpro.quizmaterpro.Dtos.Quiz;
 
 import java.util.List;
 import java.util.UUID;

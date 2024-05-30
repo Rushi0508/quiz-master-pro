@@ -1,4 +1,4 @@
-package com.quizmasterpro.quizmasterpro.Controllers;
+package com.quizmasterpro.quizmaterpro.Controllers;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.quizmasterpro.quizmasterpro.Models.Topic;
-import com.quizmasterpro.quizmasterpro.Services.TopicService;
+import com.quizmasterpro.quizmaterpro.Models.Topic;
+import com.quizmasterpro.quizmaterpro.Services.TopicService;
 
 @RestController
 @RequestMapping("/api/topics")

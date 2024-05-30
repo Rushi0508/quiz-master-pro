@@ -1,4 +1,4 @@
-package com.quizmasterpro.quizmasterpro;
+package com.quizmasterpro.quizmaterpro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
