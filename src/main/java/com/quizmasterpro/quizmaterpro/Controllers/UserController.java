@@ -24,7 +24,7 @@ import com.quizmasterpro.quizmaterpro.Services.UserService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/users/")
 public class UserController {
 
     @Autowired
@@ -32,13 +32,13 @@ public class UserController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<UserDto>> getAllUsers(){
         List<UserDto> userDtos = userService.getAllUsers().stream().map(user->modelMapper.map(user, UserDto.class)).collect(Collectors.toList());
         return ResponseEntity.ok(userDtos);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<?> getUserById(@PathVariable UUID id) {
         var user =  userService.getUserById(id);
         if(user.isEmpty()){
@@ -47,7 +47,7 @@ public class UserController {
         return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
     }
     
-    @PostMapping("/register")
+    @PostMapping("register")
     public ResponseEntity<?> registerUser(@RequestBody @Valid UserRegisterDto userRegisterDto, BindingResult bindingResult) {
         try{
             if(bindingResult.hasErrors()){
@@ -60,7 +60,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<?> loginUser(@RequestBody @Valid UserLoginDto userLoginDto, BindingResult bindingResult) {
         try{
             if(bindingResult.hasErrors()){
@@ -73,7 +73,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<?> deleteUser(@PathVariable UUID id) {
         try{
             userService.deleteUserById(id);
