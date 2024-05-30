@@ -1,4 +1,4 @@
-package com.quizmasterpro.quizmaterpro.Models;
+package com.quizmasterpro.quizmasterpro.Models;
 
 import java.util.Date;
 import java.util.List;

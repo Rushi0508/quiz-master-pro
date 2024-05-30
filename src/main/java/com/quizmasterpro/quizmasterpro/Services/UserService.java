@@ -1,4 +1,4 @@
-package com.quizmasterpro.quizmaterpro.Services;
+package com.quizmasterpro.quizmasterpro.Services;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,8 +7,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.quizmasterpro.quizmaterpro.Models.User;
-import com.quizmasterpro.quizmaterpro.Repository.UserRepository;
+import com.quizmasterpro.quizmasterpro.Models.User;
+import com.quizmasterpro.quizmasterpro.Repository.UserRepository;
 
 @Service
 public class UserService {

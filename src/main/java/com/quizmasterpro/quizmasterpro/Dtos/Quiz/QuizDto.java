@@ -1,4 +1,4 @@
-package com.quizmasterpro.quizmaterpro.Dtos.Quiz;
+package com.quizmasterpro.quizmasterpro.Dtos.Quiz;
 
 import java.util.Date;
 import java.util.List;

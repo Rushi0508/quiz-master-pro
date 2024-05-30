@@ -1,4 +1,4 @@
-package com.quizmasterpro.quizmaterpro.Controllers;
+package com.quizmasterpro.quizmasterpro.Controllers;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.quizmasterpro.quizmaterpro.Models.Quiz;
-import com.quizmasterpro.quizmaterpro.Services.QuizService;
+import com.quizmasterpro.quizmasterpro.Models.Quiz;
+import com.quizmasterpro.quizmasterpro.Services.QuizService;
 
 @RestController
 @RequestMapping("/api/quizzes")

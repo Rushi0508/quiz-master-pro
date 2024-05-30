@@ -1,4 +1,4 @@
-package com.quizmasterpro.quizmaterpro.Dtos.Topic;
+package com.quizmasterpro.quizmasterpro.Dtos.Topic;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
