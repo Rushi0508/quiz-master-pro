@@ -30,7 +30,8 @@ public class Quiz {
     private String difficulty;
     private int totalQuestions;
     private int correctAnswers;
-    private boolean completed;
+
+    private boolean completed = false;
     private int currentQuestionIndex;
 
      @ElementCollection
@@ -45,5 +46,5 @@ public class Quiz {
     @ElementCollection
     private List<String> userResponses;
     
-    private Date dateTaken;
+    private Date dateTaken = new Date();
 }
