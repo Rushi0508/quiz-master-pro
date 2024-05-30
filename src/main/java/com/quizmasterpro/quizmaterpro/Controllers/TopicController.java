@@ -2,9 +2,10 @@ package com.quizmasterpro.quizmaterpro.Controllers;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.quizmasterpro.quizmaterpro.Dtos.Topic.TopicCreateDto;
+import com.quizmasterpro.quizmaterpro.Dtos.Topic.TopicDto;
 import com.quizmasterpro.quizmaterpro.Models.Topic;
 import com.quizmasterpro.quizmaterpro.Services.TopicService;
 
@@ -23,29 +26,41 @@ public class TopicController {
 
     @Autowired
     private TopicService topicService;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    @GetMapping
-    public ResponseEntity<List<Topic>> getAllTopics() {
-        List<Topic> topics = topicService.getAllTopics();
-        return new ResponseEntity<>(topics, HttpStatus.OK);
+    @GetMapping("")
+    public ResponseEntity<List<TopicDto>> getAllTopics() {
+        List<TopicDto> topicDtos = topicService.getAllTopics().stream().map(topic->modelMapper.map(topic, TopicDto.class)).collect(Collectors.toList());
+        return ResponseEntity.ok(topicDtos);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Topic> getTopicById(@PathVariable UUID id) {
-        return topicService.getTopicById(id)
-                .map(topic -> new ResponseEntity<>(topic, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @GetMapping("{id}")
+    public ResponseEntity<?> getTopicById(@PathVariable UUID id) {
+        var topic =  topicService.getTopicById(id);
+        if(topic.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(modelMapper.map(topic, TopicDto.class));
     }
 
     @PostMapping
-    public ResponseEntity<Topic> createTopic(@RequestBody Topic topic) {
-        Topic savedTopic = topicService.saveTopic(topic);
-        return new ResponseEntity<>(savedTopic, HttpStatus.CREATED);
+    public ResponseEntity<?> createTopic(@RequestBody TopicCreateDto topicCreateDto) {
+        try{
+            Topic savedTopic = topicService.saveTopic(topicCreateDto);
+            return ResponseEntity.ok(modelMapper.map(savedTopic, TopicDto.class));
+        }catch(Exception ex){
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTopic(@PathVariable UUID id) {
-        topicService.deleteTopic(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteTopic(@PathVariable UUID id) {
+        try{
+            topicService.deleteTopicById(id);
+            return ResponseEntity.ok(true);
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

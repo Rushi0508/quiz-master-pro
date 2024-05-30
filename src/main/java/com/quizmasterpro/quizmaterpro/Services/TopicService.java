@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.quizmasterpro.quizmaterpro.Dtos.Topic.TopicCreateDto;
 import com.quizmasterpro.quizmaterpro.Models.Topic;
 import com.quizmasterpro.quizmaterpro.Repository.TopicRepository;
 
@@ -14,6 +16,8 @@ import com.quizmasterpro.quizmaterpro.Repository.TopicRepository;
 public class TopicService {
     @Autowired
     private TopicRepository topicRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     public List<Topic> getAllTopics(){
         return topicRepository.findAll();
@@ -23,11 +27,17 @@ public class TopicService {
         return topicRepository.findById(id);
     }
 
-    public Topic saveTopic(Topic topic) {
-        return topicRepository.save(topic);
+    public Topic saveTopic(TopicCreateDto topicCreateDto) {
+        if(topicRepository.findByName(topicCreateDto.getName()).isPresent()){
+            throw new IllegalArgumentException("Topic already exists");
+        }
+        return topicRepository.save(modelMapper.map(topicCreateDto, Topic.class));
     }
 
-    public void deleteTopic(UUID id) {
+    public void deleteTopicById(UUID id) {
+        if (topicRepository.findById(id).isEmpty()) {
+            throw new IllegalArgumentException("No topic found to delete");
+        }
         topicRepository.deleteById(id);
     }
 }

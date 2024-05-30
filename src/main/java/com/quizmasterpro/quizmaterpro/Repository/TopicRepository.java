@@ -1,5 +1,6 @@
 package com.quizmasterpro.quizmaterpro.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,5 +10,5 @@ import com.quizmasterpro.quizmaterpro.Models.Topic;
 
 @Repository
 public interface TopicRepository extends JpaRepository<Topic, UUID> {
-    
+    Optional<Topic> findByName(String name);
 }
