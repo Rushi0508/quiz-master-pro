@@ -5,10 +5,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.quizmasterpro.quizmaterpro.Models.Quiz;
 import com.quizmasterpro.quizmaterpro.Repository.QuizRepository;
 
+@Service
 public class QuizService {
      @Autowired
     private QuizRepository quizRepository;
