@@ -1,5 +1,6 @@
 package com.quizmasterpro.quizmaterpro.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,5 +10,5 @@ import com.quizmasterpro.quizmaterpro.Models.Quiz;
 
 @Repository
 public interface QuizRepository extends JpaRepository<Quiz, UUID> {
-    
+    List<Quiz> findByUserId(UUID id);
 }
