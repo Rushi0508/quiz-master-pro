@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.quizmasterpro.quizmaterpro.Dtos.User.TokenResp;
 import com.quizmasterpro.quizmaterpro.Dtos.User.UserDto;
 import com.quizmasterpro.quizmaterpro.Dtos.User.UserLoginDto;
 import com.quizmasterpro.quizmaterpro.Dtos.User.UserRegisterDto;
+import com.quizmasterpro.quizmaterpro.Services.JwtService;
 import com.quizmasterpro.quizmaterpro.Services.UserService;
 
 import jakarta.validation.Valid;
@@ -29,6 +31,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private JwtService jwtService;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -54,8 +58,12 @@ public class UserController {
                 return ResponseEntity.badRequest().body(bindingResult.getFieldError().getDefaultMessage());
             }
             var user = userService.register(userRegisterDto);
-            return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
+            String jwtToken = jwtService.generateToken(user);
+            TokenResp tokenResp = new TokenResp();
+            tokenResp.setToken(jwtToken);
+            return ResponseEntity.ok(tokenResp);
         }catch(Exception e){
+            System.out.println(e);
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -67,7 +75,10 @@ public class UserController {
                 return ResponseEntity.badRequest().body(bindingResult.getFieldError().getDefaultMessage());
             }
             var user = userService.login(userLoginDto);
-            return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
+            String jwtToken = jwtService.generateToken(user);
+            TokenResp tokenResp = new TokenResp();
+            tokenResp.setToken(jwtToken);
+            return ResponseEntity.ok(tokenResp);
         }catch(Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

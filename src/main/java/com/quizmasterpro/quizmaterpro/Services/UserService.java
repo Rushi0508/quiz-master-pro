@@ -6,7 +6,8 @@ import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
@@ -42,25 +45,28 @@ public class UserService {
         if (userRepository.findByUsername(userRegisterDto.getUsername()).isPresent()) {
             throw new IllegalArgumentException("Username already exists");
         }
-
+        var pass = userRegisterDto.getPassword();
         // Encrypt password
         userRegisterDto.setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));
 
         // Convert DTO to entity and save
         User user = modelMapper.map(userRegisterDto, User.class);
         userRepository.save(user);
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(userRegisterDto.getEmail(), pass)
+        );
         return user;
     }
 
     public User login(UserLoginDto userLoginDto){
+        
         var user = userRepository.findByEmail(userLoginDto.getEmail());
         if(user.isEmpty()){
-            throw new UsernameNotFoundException("Account is not registered");
+            throw new UsernameNotFoundException("Account not registered"); 
         }
-
-        if(!passwordEncoder.matches(userLoginDto.getPassword(), user.get().getPassword())){
-            throw new BadCredentialsException("Invalid Credentials");
-        }
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(userLoginDto.getEmail(), userLoginDto.getPassword())
+        );
         return user.get();
     }
 
