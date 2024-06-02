@@ -38,7 +38,7 @@ public class Quiz {
     private List<String> questions;
     
     @ElementCollection
-    private List<String> options;
+    private List<List<String>> options;
     
     @ElementCollection
     private List<String> answers;

@@ -17,8 +17,7 @@ public class QuizDto {
     private boolean completed;
     private int currentQuestionIndex;
     private List<String> questions;
-    private List<String> options;
-    private List<String> answers;
+    private List<List<String>> options;
     private List<String> userResponses;
     private Date dateTaken;
 }

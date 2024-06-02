@@ -1,18 +1,22 @@
 package com.quizmasterpro.quizmaterpro.Dtos.Quiz;
 
-import java.util.List;
+
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
+@Data
 public class QuizCreateDto {
     @NotNull(message = "User ID is required")
     private UUID userId;
-
-    @NotNull(message = "Topic ID is required")
+    
+    @NotNull(message = "User ID is required")
     private UUID topicId;
 
     @NotBlank(message = "Difficulty is required")
@@ -21,16 +25,4 @@ public class QuizCreateDto {
 
     @Positive(message = "Total questions must be positive")
     private int totalQuestions;
-
-    @Positive(message = "Correct answers must be positive")
-    private int correctAnswers;
-
-    @NotNull(message = "Questions list is required")
-    private List<String> questions;
-
-    @NotNull(message = "Options list is required")
-    private List<String> options;
-
-    @NotNull(message = "Answers list is required")
-    private List<String> answers;
 }
