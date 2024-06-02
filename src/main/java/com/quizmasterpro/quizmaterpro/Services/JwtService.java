@@ -25,6 +25,14 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
+    public String extractEmail(String token) {
+        return extractClaim(token, claims -> claims.get("email", String.class));
+    }
+
+    public String extractId(String token){
+        return extractClaim(token, claims->claims.get("id", String.class));
+    }
+
     public boolean isValid(String token, UserDetails user){
         String username = extractUsername(token);
         return (username.equals(user.getUsername())) && !isTokenExpired(token);
@@ -55,6 +63,8 @@ public class JwtService {
     public String generateToken(User user){
         String token = Jwts.builder()
             .subject(user.getUsername())
+            .claim("id", user.getId().toString())
+            .claim("email", user.getEmail())
             .issuedAt(new Date(System.currentTimeMillis()))
             .expiration(new Date(System.currentTimeMillis()+ 7*24*60*60*1000))
             .signWith(getSigninKey())
