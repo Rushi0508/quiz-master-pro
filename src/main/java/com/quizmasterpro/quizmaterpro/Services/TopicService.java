@@ -2,7 +2,6 @@ package com.quizmasterpro.quizmaterpro.Services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class TopicService {
         return topicRepository.findAll();
     }
 
-    public Optional<Topic> getTopicById(UUID id) {
+    public Optional<Topic> getTopicById(String id) {
         return topicRepository.findById(id);
     }
 
@@ -34,7 +33,7 @@ public class TopicService {
         return topicRepository.save(modelMapper.map(topicCreateDto, Topic.class));
     }
 
-    public void deleteTopicById(UUID id) {
+    public void deleteTopicById(String id) {
         if (topicRepository.findById(id).isEmpty()) {
             throw new IllegalArgumentException("No topic found to delete");
         }

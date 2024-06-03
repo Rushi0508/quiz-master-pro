@@ -1,7 +1,6 @@
 package com.quizmasterpro.quizmaterpro.Controllers;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -43,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> getUserById(@PathVariable UUID id) {
+    public ResponseEntity<?> getUserById(@PathVariable String id) {
         var user =  userService.getUserById(id);
         if(user.isEmpty()){
             return ResponseEntity.notFound().build();
@@ -85,7 +84,7 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable UUID id) {
+    public ResponseEntity<?> deleteUser(@PathVariable String id) {
         try{
             userService.deleteUserById(id);
         return ResponseEntity.ok(true);

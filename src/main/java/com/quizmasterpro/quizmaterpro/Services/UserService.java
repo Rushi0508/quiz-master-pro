@@ -2,7 +2,6 @@ package com.quizmasterpro.quizmaterpro.Services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUserById(UUID id){
+    public Optional<User> getUserById(String id){
         return userRepository.findById(id);
     }
 
@@ -70,7 +69,7 @@ public class UserService {
         return user.get();
     }
 
-    public void deleteUserById(UUID id){
+    public void deleteUserById(String id){
         if (userRepository.findById(id).isEmpty()) {
             throw new UsernameNotFoundException("No user found to delete");
         }

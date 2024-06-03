@@ -1,10 +1,6 @@
 package com.quizmasterpro.quizmaterpro.Dtos.Quiz;
 
 
-import java.util.UUID;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -14,10 +10,10 @@ import lombok.Data;
 @Data
 public class QuizCreateDto {
     @NotNull(message = "User ID is required")
-    private UUID userId;
+    private String userId;
     
     @NotNull(message = "User ID is required")
-    private UUID topicId;
+    private String topicId;
 
     @NotBlank(message = "Difficulty is required")
     @Size(max = 255, message = "Difficulty must be less than 255 characters")

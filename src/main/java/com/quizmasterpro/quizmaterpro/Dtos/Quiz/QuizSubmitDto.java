@@ -1,15 +1,14 @@
 package com.quizmasterpro.quizmaterpro.Dtos.Quiz;
 
 import java.util.List;
-import java.util.UUID;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class QuizSubmitDto {
-    @NotNull(message = "Quiz id is required")
-    private UUID quizId;
+    @NotNull(message = "User id is required")
+    private String userId;
 
     private boolean isCompleted = true;
 

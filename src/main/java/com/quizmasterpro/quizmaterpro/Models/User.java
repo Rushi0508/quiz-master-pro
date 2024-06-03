@@ -2,33 +2,27 @@ package com.quizmasterpro.quizmaterpro.Models;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.Data;
 
-@Entity
-@Table(name = "users")
 @Data
+@Document(collection = "users")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(generator = "UUID")
-    private UUID id;
+    private String id;
 
     private String name;
     private String username;
     private String password;
     private String email;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @DBRef
     private List<Quiz> quizzes;
 
     @Override

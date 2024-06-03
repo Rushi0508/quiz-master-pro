@@ -1,17 +1,15 @@
 package com.quizmasterpro.quizmaterpro.Models;
 
-import java.util.UUID;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import jakarta.persistence.Id;
 import lombok.Data;
 
-@Entity
 @Data
+@Document(collection = "topics")
 public class Topic {
     @Id
-    @GeneratedValue(generator = "UUID")
-    private UUID id;
+    private String id;
     private String name;
 }

@@ -1,7 +1,6 @@
 package com.quizmasterpro.quizmaterpro.Controllers;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -36,7 +35,7 @@ public class TopicController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> getTopicById(@PathVariable UUID id) {
+    public ResponseEntity<?> getTopicById(@PathVariable String id) {
         var topic =  topicService.getTopicById(id);
         if(topic.isEmpty()){
             return ResponseEntity.notFound().build();
@@ -55,7 +54,7 @@ public class TopicController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> deleteTopic(@PathVariable UUID id) {
+    public ResponseEntity<?> deleteTopic(@PathVariable String id) {
         try{
             topicService.deleteTopicById(id);
             return ResponseEntity.ok(true);
