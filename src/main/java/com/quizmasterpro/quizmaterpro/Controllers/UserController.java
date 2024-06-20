@@ -3,6 +3,7 @@ package com.quizmasterpro.quizmaterpro.Controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.quizmasterpro.quizmaterpro.Models.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -57,8 +58,8 @@ public class UserController {
                 return ResponseEntity.badRequest().body(bindingResult.getFieldError().getDefaultMessage());
             }
             var user = userService.register(userRegisterDto);
+            TokenResp tokenResp = modelMapper.map(user, TokenResp.class);
             String jwtToken = jwtService.generateToken(user);
-            TokenResp tokenResp = new TokenResp();
             tokenResp.setToken(jwtToken);
             return ResponseEntity.ok(tokenResp);
         }catch(Exception e){
@@ -73,9 +74,9 @@ public class UserController {
             if(bindingResult.hasErrors()){
                 return ResponseEntity.badRequest().body(bindingResult.getFieldError().getDefaultMessage());
             }
-            var user = userService.login(userLoginDto);
+            User user = userService.login(userLoginDto);
+            TokenResp tokenResp = modelMapper.map(user, TokenResp.class);
             String jwtToken = jwtService.generateToken(user);
-            TokenResp tokenResp = new TokenResp();
             tokenResp.setToken(jwtToken);
             return ResponseEntity.ok(tokenResp);
         }catch(Exception e){
