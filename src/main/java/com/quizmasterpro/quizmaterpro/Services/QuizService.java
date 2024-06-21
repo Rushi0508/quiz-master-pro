@@ -79,8 +79,9 @@ public class QuizService {
         List<String> answers = quiz.getAnswers();
         List<String> userResponses = quizSubmitDto.getUserResponses();
         int correctAnswers = 0;
-        for(int i=0;i<answers.size();i++){
-            if(answers.get(i).equals(userResponses.get(i))){
+        for (int i = 0; i < answers.size(); i++) {
+            int userResponse = Integer.parseInt(userResponses.get(i)) + 1; // Convert user response to integer and add 1
+            if (answers.get(i).equals(String.valueOf(userResponse))) { // Convert back to string and compare
                 correctAnswers++;
             }
         }
