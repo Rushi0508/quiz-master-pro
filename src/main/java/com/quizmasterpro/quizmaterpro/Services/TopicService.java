@@ -27,7 +27,7 @@ public class TopicService {
     }
 
     public Topic saveTopic(TopicCreateDto topicCreateDto) {
-        if(topicRepository.findByName(topicCreateDto.getName()).isPresent()){
+        if(topicRepository.findByNameIgnoreCase(topicCreateDto.getName()).isPresent()){
             throw new IllegalArgumentException("Topic already exists");
         }
         return topicRepository.save(modelMapper.map(topicCreateDto, Topic.class));
