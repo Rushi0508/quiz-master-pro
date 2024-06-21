@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.quizmasterpro.quizmaterpro.Models.User;
+import com.quizmasterpro.quizmaterpro.Services.QuizService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,8 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
+    private QuizService quizService;
+    @Autowired
     private JwtService jwtService;
     @Autowired
     private ModelMapper modelMapper;
@@ -44,11 +47,14 @@ public class UserController {
 
     @GetMapping("{id}")
     public ResponseEntity<?> getUserById(@PathVariable String id) {
-        var user =  userService.getUserById(id);
-        if(user.isEmpty()){
-            return ResponseEntity.notFound().build();
+        try{
+            User user =  userService.getUserById(id);
+            var quizzes = quizService.getByUserId(id);
+            user.setQuizzes(quizzes);
+            return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return ResponseEntity.ok(modelMapper.map(user, UserDto.class));
     }
     
     @PostMapping("register")

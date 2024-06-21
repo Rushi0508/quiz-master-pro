@@ -31,8 +31,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUserById(String id){
-        return userRepository.findById(id);
+    public User getUserById(String id){
+        return userRepository.findById(id).orElseThrow(()->new UsernameNotFoundException("User not found"));
     }
 
     public User register(UserRegisterDto userRegisterDto){
