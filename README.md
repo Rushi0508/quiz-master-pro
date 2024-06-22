@@ -30,3 +30,33 @@ Quiz Master is designed to offer a seamless quiz-taking experience with a focus 
 
 - **API Endpoints:**
   - RESTful endpoints for user registration, login, quiz management, and profile management
+
+## Technologies Used
+
+### Frontend
+- Typescript
+- React Native
+- React Native Paper
+
+### Backend
+- Java
+- Spring Boot
+- MongoDB
+- Spring Security
+- Gemini API
+- Lombok
+- Maven
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+If you have any questions or feedback, feel free to contact me at rushigandhi14@gmail.com.
+
+
