@@ -48,8 +48,9 @@ public class QuizController {
     @GetMapping("user/{userId}")
     public ResponseEntity<?> getQuizzesByUserId(@PathVariable String userId) {
         try{
-            List<QuizDto> quizDtos = quizService.getByUserId(userId).stream().map(quiz->modelMapper.map(quiz, QuizDto.class)).collect(Collectors.toList());
-            return ResponseEntity.ok(quizDtos);
+//            List<QuizDto> quizDtos = quizService.getByUserId(userId).stream().map(quiz->modelMapper.map(quiz, QuizDto.class)).collect(Collectors.toList());
+            List<Quiz> quizzes = quizService.getByUserId(userId);
+            return ResponseEntity.ok(quizzes);
         }catch(Exception e){
             System.out.println(e);
             return ResponseEntity.badRequest().body(e.getMessage());
