@@ -2,6 +2,8 @@
 
 Quiz Master is a Spring Boot backend application for creating and managing quizzes. Users can log in, select quiz topics, choose difficulty levels, and take quizzes generated dynamically using OpenAI. The application tracks user scores and provides insights into user performance globally.
 
+### Watch the demo video at [Drive](https://drive.google.com/file/d/1OpAXqE7R1RS_IL_kVpWYWAppY9wgMkQE/view?usp=sharing) | [Youtube](https://youtu.be/5rxqHC4rcf4)
+
 ## Description
 
 Quiz Master is designed to offer a seamless quiz-taking experience with a focus on dynamic content generation and user performance tracking. Users can register, log in, and select from predefined quiz topics. Each quiz is customized based on selected difficulty levels and the number of questions. Upon completion, users can view their scores and see how they rank globally among other users.
